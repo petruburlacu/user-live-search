@@ -1,6 +1,7 @@
 package com.search.demo.service;
 
 import com.search.demo.constants.RequestStatus;
+import com.search.demo.exception.InputValidationException;
 import com.search.demo.model.ResponseAPI;
 import com.search.demo.model.User;
 import com.search.demo.repository.UserRepository;
@@ -15,11 +16,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+    /** Class Logger */
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
+    /**
+     * The autowired user repository
+     */
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * Retrieves user(s) based on the provided string input
+     * @param login string user input
+     * @return Custom ResponseAPI in ResponseEntity
+     */
     public ResponseEntity<ResponseAPI> searchUsers(String login) {
         LOGGER.info("Inside searchUsers({})", login);
         return new ResponseEntity<>(
@@ -32,6 +42,10 @@ public class UserService {
         );
     }
 
+    /**
+     * Retrieves all available users
+     * @return Custom ResponseAPI in ResponseEntity with HttpStatus.OK on success and HttpStatus.INTERNAL_SERVER_ERROR
+     */
     public ResponseEntity<ResponseAPI> fetchUsers() {
         LOGGER.info("Inside fetchUsers()");
         try {
@@ -49,6 +63,11 @@ public class UserService {
         }
     }
 
+    /**
+     * Inserts new user to the database
+     * @param user User object from payload
+     * @return Custom ResponseAPI in ResponseEntity with HttpStatus.OK on success and HttpStatus.INTERNAL_SERVER_ERROR
+     */
     public ResponseEntity<ResponseAPI> addUser(User user) {
         LOGGER.info("Inside addUser()");
         try {

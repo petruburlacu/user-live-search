@@ -11,6 +11,11 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackageClasses = UserRepository.class)
 public class DatabaseConfig {
 
+    /**
+     * Set up user repository with predefined entries
+     * @param userRepository UserRepository object
+     * @return CommandLineRunner
+     */
     @Bean
     CommandLineRunner commandLineRunner(UserRepository userRepository) {
         return string -> {
