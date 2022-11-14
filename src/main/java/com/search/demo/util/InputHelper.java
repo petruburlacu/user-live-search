@@ -6,8 +6,10 @@ import org.slf4j.LoggerFactory;
 
 public class InputHelper {
 
+    /** Class Logger */
     private static final Logger LOGGER = LoggerFactory.getLogger(InputHelper.class);
 
+    /** VALIDATION_PATTERN regex constant */
     private static final String VALIDATION_PATTERN = "^[a-zA-Z\\d-_]+$";
 
     /**
