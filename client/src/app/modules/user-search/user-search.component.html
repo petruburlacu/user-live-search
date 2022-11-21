@@ -1,0 +1,13 @@
+
+<label for="search" class="block text-sm font-medium text-gray-700">Search</label>
+<input type="text" name="search" id="search" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Type here..." (keyup)="onInput($event)" autofocus/>
+<ng-container *ngIf="users$ | async as users">
+
+    <div *ngIf="users.loading">Loading...</div>
+    <div *ngIf="!users.loading">
+        <div *ngFor="let user of users.data; trackBy: trackByFn;">
+            <span class="user-detail search-option">{{user?.firstName}} {{user?.lastName}} ({{user?.login}})</span>
+        </div>
+    </div>
+    <div *ngIf="!users.loading && users.noResults">No results</div>
+</ng-container>
